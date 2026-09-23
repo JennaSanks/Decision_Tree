@@ -1,0 +1,938 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bank Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --cream: #FFF9F0;
+            --lavender: #DCD6F7;
+            --pink: #F4C7C3;
+            --sage: #C9D8C5;
+            --blue: #C9DDF2;
+            --yellow: #F5E6B8;
+            --dark: #252525;
+            --muted: #77736E;
+            --line: #D8D2C8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--dark);
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 82px;
+            padding: 0 42px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-right a {
+            color: var(--dark);
+            text-decoration: none;
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-dot {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .menu-dot:hover {
+            background: var(--dark);
+            color: white;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 88vh;
+            padding: 70px 42px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .eyebrow,
+        .hero-number {
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-title {
+            font-size: clamp(70px, 12vw, 185px);
+            line-height: 0.8;
+            letter-spacing: -9px;
+            font-weight: 600;
+            margin-top: 70px;
+        }
+
+        .hero-title span {
+            font-weight: 300;
+            color: #777;
+        }
+
+        .hero-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: end;
+        }
+
+        .hero-description {
+            max-width: 470px;
+            font-size: 18px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .scroll {
+            text-align: right;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* ================= INTRO ================= */
+
+        .intro {
+            padding: 120px 42px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-label {
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .intro h2 {
+            font-size: clamp(42px, 5vw, 75px);
+            line-height: 0.95;
+            letter-spacing: -4px;
+            font-weight: 500;
+        }
+
+        .intro h2 span {
+            color: var(--muted);
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .feature {
+            min-height: 300px;
+            padding: 35px;
+            position: relative;
+            border-right: 1px solid var(--line);
+            transition: 0.4s ease;
+        }
+
+        .feature:nth-child(1) {
+            background: var(--lavender);
+        }
+
+        .feature:nth-child(2) {
+            background: var(--pink);
+        }
+
+        .feature:nth-child(3) {
+            background: var(--sage);
+            border-right: none;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+        }
+
+        .feature-number {
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+        }
+
+        .feature h3 {
+            position: absolute;
+            bottom: 35px;
+            font-size: 30px;
+            line-height: 0.95;
+            font-weight: 500;
+            letter-spacing: -1px;
+        }
+
+        /* ================= PREDICTION ================= */
+
+        .predict-section {
+            padding: 120px 42px;
+            background: var(--lavender);
+            color: var(--dark);
+        }
+
+        .predict-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 70px;
+        }
+
+        .predict-header h2 {
+            font-size: clamp(55px, 8vw, 120px);
+            line-height: 0.82;
+            letter-spacing: -6px;
+            font-weight: 500;
+        }
+
+        .predict-header p {
+            max-width: 310px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #5f5a69;
+        }
+
+        form {
+            border-top: 1px solid #aaa2bd;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #aaa2bd;
+        }
+
+        .field {
+            padding: 22px 0;
+            margin-right: 35px;
+        }
+
+        .field:nth-child(2) {
+            margin-left: 35px;
+            margin-right: 0;
+        }
+
+        label {
+            display: block;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #777080;
+            margin-bottom: 10px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #aaa2bd;
+            background: transparent;
+            color: var(--dark);
+            padding: 12px 0;
+            font-size: 17px;
+            font-family: "Inter", sans-serif;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-bottom: 2px solid var(--dark);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: var(--cream);
+            color: var(--dark);
+        }
+
+        /* ================= BUTTON ================= */
+
+        .submit-area {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submit-info {
+            font-family: "DM Mono", monospace;
+            color: #777080;
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        button {
+            width: 175px;
+            height: 175px;
+            border-radius: 50%;
+            border: 1px solid var(--dark);
+            background: var(--pink);
+            color: var(--dark);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.4s ease;
+        }
+
+        button:hover {
+            background: var(--sage);
+            transform: rotate(-8deg) scale(1.06);
+        }
+
+        /* ================= RESULT ================= */
+
+        .result-wrapper {
+            padding: 110px 42px;
+            background: var(--sage);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .result-label {
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .result {
+            font-size: clamp(40px, 6vw, 90px);
+            line-height: 0.95;
+            letter-spacing: -4px;
+            max-width: 1100px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 35px 42px;
+            display: flex;
+            justify-content: space-between;
+            font-family: "DM Mono", monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-right a {
+                display: none;
+            }
+
+            .hero,
+            .intro,
+            .predict-section,
+            .result-wrapper {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-title {
+                font-size: 18vw;
+                letter-spacing: -5px;
+            }
+
+            .hero-bottom {
+                grid-template-columns: 1fr;
+            }
+
+            .scroll {
+                text-align: left;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .feature {
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .field,
+            .field:nth-child(2) {
+                margin: 0;
+            }
+
+            .predict-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .submit-area {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 40px;
+            }
+
+            button {
+                width: 140px;
+                height: 140px;
+            }
+
+            footer {
+                padding: 25px 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <div class="logo">
+        BANK<span>/INTELLIGENCE</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="#about">About</a>
+        <a href="#predict">Predict</a>
+
+        <div class="menu-dot">
+            +
+        </div>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-top">
+
+        <div class="eyebrow">
+            Machine Learning / 01
+        </div>
+
+        <div class="hero-number">
+            Decision Tree Classifier
+        </div>
+
+    </div>
+
+
+    <div>
+
+        <h1 class="hero-title">
+            BANK<br>
+            <span>INTELLIGENCE</span>
+        </h1>
+
+    </div>
+
+
+    <div class="hero-bottom">
+
+        <p class="hero-description">
+            A machine-learning interface designed to understand
+            customer behaviour and predict the likelihood of
+            subscribing to a term deposit.
+        </p>
+
+        <div class="scroll">
+            ↓ SCROLL TO EXPLORE
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro" id="about">
+
+    <div class="section-label">
+        / 02 — THE SYSTEM
+    </div>
+
+    <h2>
+        Data in.<br>
+        Decisions out.<br>
+        <span>Powered by a Decision Tree.</span>
+    </h2>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="feature">
+
+        <div class="feature-number">
+            01
+        </div>
+
+        <h3>
+            Customer<br>
+            Data
+        </h3>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-number">
+            02
+        </div>
+
+        <h3>
+            Machine<br>
+            Learning
+        </h3>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-number">
+            03
+        </div>
+
+        <h3>
+            Prediction<br>
+            Engine
+        </h3>
+
+    </div>
+
+</section>
+
+
+<!-- PREDICTION -->
+
+<section class="predict-section" id="predict">
+
+    <div class="predict-header">
+
+        <h2>
+            MAKE<br>
+            A CALL.
+        </h2>
+
+        <p>
+            Enter customer information below.
+            The trained Decision Tree model will
+            analyse the data and generate a prediction.
+        </p>
+
+    </div>
+
+
+    <form action="/predict" method="POST">
+
+
+        <!-- AGE + JOB -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Age</label>
+
+                <input
+                    type="number"
+                    name="age"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Job</label>
+
+                <select name="job">
+
+                    <option>admin.</option>
+                    <option>blue-collar</option>
+                    <option>entrepreneur</option>
+                    <option>housemaid</option>
+                    <option>management</option>
+                    <option>retired</option>
+                    <option>self-employed</option>
+                    <option>services</option>
+                    <option>student</option>
+                    <option>technician</option>
+                    <option>unemployed</option>
+                    <option>unknown</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- MARITAL + EDUCATION -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Marital Status</label>
+
+                <select name="marital">
+
+                    <option>married</option>
+                    <option>single</option>
+                    <option>divorced</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Education</label>
+
+                <select name="education">
+
+                    <option>primary</option>
+                    <option>secondary</option>
+                    <option>tertiary</option>
+                    <option>unknown</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- DEFAULT + BALANCE -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Default</label>
+
+                <select name="default">
+
+                    <option>no</option>
+                    <option>yes</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Balance</label>
+
+                <input
+                    type="number"
+                    name="balance"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- HOUSING + LOAN -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Housing Loan</label>
+
+                <select name="housing">
+
+                    <option>yes</option>
+                    <option>no</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Personal Loan</label>
+
+                <select name="loan">
+
+                    <option>yes</option>
+                    <option>no</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTACT + DAY -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Contact</label>
+
+                <select name="contact">
+
+                    <option>cellular</option>
+                    <option>telephone</option>
+                    <option>unknown</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Day</label>
+
+                <input
+                    type="number"
+                    name="day"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- MONTH + CAMPAIGN -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Month</label>
+
+                <select name="month">
+
+                    <option>jan</option>
+                    <option>feb</option>
+                    <option>mar</option>
+                    <option>apr</option>
+                    <option>may</option>
+                    <option>jun</option>
+                    <option>jul</option>
+                    <option>aug</option>
+                    <option>sep</option>
+                    <option>oct</option>
+                    <option>nov</option>
+                    <option>dec</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Campaign</label>
+
+                <input
+                    type="number"
+                    name="campaign"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- PREVIOUS + MODEL -->
+
+        <div class="form-row">
+
+            <div class="field">
+
+                <label>Previous Contacts</label>
+
+                <input
+                    type="number"
+                    name="previous"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Prediction Model</label>
+
+                <input
+                    type="text"
+                    value="Decision Tree Classifier"
+                    disabled
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="submit-area">
+
+            <div class="submit-info">
+
+                MODEL / DECISION-TREE-01<br>
+                CLASSIFICATION / BINARY<br>
+                OUTPUT / YES — NO
+
+            </div>
+
+
+            <button type="submit">
+                Predict →
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+<!-- RESULT -->
+
+{% if prediction %}
+
+<section class="result-wrapper">
+
+    <div class="result-label">
+        / 03 — MODEL OUTPUT
+    </div>
+
+    <div class="result">
+        {{ prediction }}
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+        BANK / INTELLIGENCE
+    </div>
+
+    <div>
+        AI & ML PROJECT — 2026
+    </div>
+
+</footer>
+
+
+</body>
+</html>
+```
